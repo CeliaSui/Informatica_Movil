@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4CAF50</color> <!-- Verde principal -->
+    <color name="colorPrimaryVariant">#388E3C</color> <!-- Verde oscuro -->
+    <color name="colorSecondary">#C8E6C9</color> <!-- cardview -->
+    <color name="background">#F1F8E9</color> <!-- Fondo claro -->
+    <color name="onBackground">#1B5E20</color> <!-- Texto -->
+</resources>
+

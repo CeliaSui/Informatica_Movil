@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.AppAsturiasBodegas" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:textColor">@color/onBackground</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+    </style>
+    <style name="Theme.AppAsturiasBodegas" parent="Base.Theme.AppAsturiasBodegas" />
+</resources>

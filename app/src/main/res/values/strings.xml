@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">AppAsturiasBodegas</string>
+
+    <string name="itemBodegaData" translatable="false">
+        &lt;p align="center"&gt;&lt;b&gt;%1$s&lt;/b&gt;&lt;/p&gt;&lt;br/&gt;
+        &lt;b&gt;%2$s:&lt;/b&gt; %3$s &lt;br/&gt;&lt;br/&gt;
+        &lt;b&gt;%4$s:&lt;/b&gt; %5$s
+    </string>
+    <string name="fav_button">Añadir a favoritos</string>
+    <string name="buscar_bodega">Buscar bodega</string>
+    <string name="error_cargar_datos">Error al cargar los datos.</string>
+    <string name="error_generico_con_mensaje">Ha ocurrido un error: %1$s</string>
+    <string name="filter_by_zone">Filtrar por zona</string>
+    <string name="filter_by_concejo">Filtrar por concejo</string>
+    <string name="button_apply_filters">Aplicar filtros</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_map">Mapa</string>
+    <string name="menu_favorites">Favoritos</string>
+    <string name="menu_config">Configuración</string>
+    <string name="menu_search">Buscar</string>
+    <string name="menu_filter">Filtrar</string>
+    <string name="menu_details">Detalles</string>
+    <string name="preferences_themes">Tema</string>
+    <string name="preferences_dark_mode">Modo oscuro</string>
+    <string name="preferences_light_mode">Modo claro</string>
+    <string name="preferences_switch_theme">Cambiar entre modo claro y oscuro</string>
+    <string name="map_no_horario">No hay información disponible</string>
+    <string name="search_no_found">Bodega no encontrada</string>
+    <string name="spinner_todas">Todas</string>
+    <string name="spinner_todos">Todos</string>
+    <string name="bodega_image">Imagen del local</string>
+    <string name="preferences_language">Idiomas</string>
+    <string name="preferences_language_summary">Seleccione un idioma</string>
+    <string-array name="language_entries">
+        <item>Español</item>
+        <item>Inglés</item>
+    </string-array>
+    <string-array name="language_values" translatable="false">
+        <item>es</item>
+        <item>en</item>
+    </string-array>
+    <string name="select_phone_number">Seleccione un número para llamar</string>
+</resources>
