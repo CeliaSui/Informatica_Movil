@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import es.uniovi.appasturiasbodegas.R
 import es.uniovi.appasturiasbodegas.databinding.ItemImageBinding
 
+// Clase adaptadora para mostrar una lista de imágenes en un ViewPager.
 class ImagePagerAdapter(private val imageUrls: List<String>) :
     RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder>() {
     // Adapter para el ViewPager que muestra varias imágenes de una bodega.
@@ -23,7 +24,7 @@ class ImagePagerAdapter(private val imageUrls: List<String>) :
 
     class ImageViewHolder(private val binding: ItemImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
+        // ViewHolder para cada imagen en el ViewPager.
         fun bind(imageUrl: String) {
             Glide.with(binding.imageView.context)
                 .load(imageUrl)

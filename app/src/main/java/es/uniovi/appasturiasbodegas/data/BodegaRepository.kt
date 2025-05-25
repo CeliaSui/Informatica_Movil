@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 
+// Clase que actúa como repositorio para acceder a los datos de las bodegas
 class BodegaRepository(private val bodegaDAO: BodegaDAO) {
 
     // Obtener una bodega por su ID

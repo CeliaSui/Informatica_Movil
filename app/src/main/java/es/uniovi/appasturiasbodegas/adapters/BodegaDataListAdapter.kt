@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import es.uniovi.appasturiasbodegas.databinding.ListItemBinding
 import es.uniovi.appasturiasbodegas.model.Bodega
 
+// Clase adaptadora para mostrar una lista de bodegas en un RecyclerView.
 class BodegaDataListAdapter(
     private val onItemClicked: (Int) -> Unit,
     private val onFavClick: (Int, Boolean) -> Unit

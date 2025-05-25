@@ -12,6 +12,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import com.bumptech.glide.Glide
 
+// Clase que maneja la vista de cada elemento de la lista de bodegas
 class BodegaViewHolder(
         private val binding: ListItemBinding,
         private val onItemClicked: (Int) ->Unit,

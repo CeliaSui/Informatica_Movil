@@ -12,6 +12,7 @@ import org.json.JSONObject
 import com.bumptech.glide.Glide
 import es.uniovi.appasturiasbodegas.R
 
+// Clase que maneja la vista de detalles de una bodega
 class BodegaDetailViewHolder(private val binding: FragmentDetailBinding) {
     fun bind(bodega: Bodega) {
         val article = bodega.articles.article[0]
