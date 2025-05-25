@@ -17,136 +17,75 @@
 
 La aplicación sigue una arquitectura basada en MVVM (Model-View-ViewModel), que separa claramente la lógica de negocio, la gestión de datos y la interfaz de usuario.
 
-- Model: Incluye las entidades de datos (Bodega, Articles, etc.), la base de datos local (BodegaDatabase, BodegaDAO) y los adaptadores de conversión de datos.
-- Repository: El repositorio (BodegaRepository) actúa como intermediario entre la base de datos local y la red, proporcionando una fuente única de datos para la aplicación.
-- ViewModel: Los ViewModels (BodegaViewModel, BodegaDetailsViewModel, etc.) gestionan la lógica de presentación y exponen los datos a la UI mediante LiveData.
-- View/UI: Los Fragments y Adapters (HomeFragment, DetailFragment, BodegaDataListAdapter, etc.) muestran los datos y gestionan la interacción con el usuario.
-- Network: La capa de red (RestApi, RestApiService) se encarga de obtener los datos desde el servicio web.
+*Nota: Para acortar los términos, en las diferentes clases cuando se menciona el término 'bodega(s), se refiere a 'bodegas, llagares y queserías'.*
 
 ## Capa de Presentación (UI/View)
 
-Encargada de la interacción con el usuario, mostrando datos y recibiendo acciones.
+La capa de Presentación es responsable de mostrar la interfaz de usuario y de interactuar con el usuario, mostrando datos y recibiendo acciones. Recibe los datos del ViewModel y los muestra, y envía las acciones del usuario al ViewModel.
 
 ### Fragmentos
 
-MainActivity: Actividad principal que gestiona la navegación, preferencias, idioma, tema y visibilidad de la barra de navegación.
-DetailFragment: Muestra los detalles de una bodega seleccionada.
-MapFragment: Muestra un mapa con marcadores de bodegas.
-SettingsFragment: Permite al usuario cambiar preferencias como idioma y tema.
-FilterDialogFragment: Diálogo para filtrar bodegas por zona y concejo.
-AppUIState: Sello que representa el estado de la UI (éxito, error, cargando).
+- HomeFragment: Fragmento que muestra la lista principal de bodegas, gestiona la búsqueda y los filtros.
+- FavoritesFragment: Fragmento que muestra la lista de bodegas favoritas y permite buscarlas o filtrarlas.
+- DetailFragment: Fragmento que muestra los detalles de una bodega seleccionada.
+- MapFragment: Fragmento que muestra un mapa con marcadores de bodegas.
+- SettingsFragment: Fragmento que permite al usuario cambiar preferencias como idioma y tema.
+- FilterDialogFragment: Fragmento de diálogo para filtrar bodegas por zona y concejo.
 
-### Adaptadores
+### Adaptadores y ViewHolders
 
-BodegaDetailViewHolder: Gestiona la vista de detalle de una bodega.
-BodegaViewHolder: Gestiona la vista de cada elemento de la lista de bodegas.
-BodegaDataListAdapter: Adaptador para la lista de bodegas en un RecyclerView.
-ImagePagerAdapter: Adaptador para mostrar imágenes en un ViewPager.
+- BodegaDataListAdapter: Adaptador para mostrar la lista de bodegas y gestiona los clics y favoritos.
+- BodegaViewHolder: ViewHolder que representa cada elemento de la lista de bodegas, mostrando información básica y el botón de favorito.
+- BodegaDetailViewHolder: ViewHolder que muestra los detalles completos de una bodega en la pantalla de detalle.
+- ImagePagerAdapter: Adaptador para mostrar varias imágenes de una bodega en un ViewPager.
 
-2. Capa de Dominio (ViewModel y lógica de negocio)
-Contiene la lógica de negocio y la gestión de datos entre la UI y el repositorio.
+### Activity
 
-Clases principales:
+- MainActivity: Actividad principal que gestiona la navegación y la configuración global de la app.
 
+## Capa de Dominio (ViewModel)
 
-BodegaViewModel: Gestiona la obtención y filtrado de bodegas para la UI principal.
-BodegaViewModelFactory: Crea instancias de BodegaViewModel.
-BodegaDetailsViewModel: Gestiona la obtención de detalles de una bodega específica.
-BodegaDetailsViewModelFactory: Crea instancias de BodegaDetailsViewModel.
-BodegaFavoritosViewModel: Gestiona la lógica de favoritos y filtrado de bodegas favoritas.
-BodegaFavoritosViewModelFactory: Crea instancias de BodegaFavoritosViewModel.
-MapViewModel: Gestiona la obtención de bodegas para el mapa.
-MapViewModelFactory: Crea instancias de MapViewModel.
-<hr></hr>
-3. Capa de Datos (Repositorio y acceso a datos)
-Gestiona el acceso a la base de datos local y a la red.
+La capa de dominio es responsable de la lógica de negocio de la aplicación y la gestión de datos entre la UI y el repositorio. Se gestionan las reglas, operaciones y procesos principales que definen el funcionamiento interno, independientemente de cómo se presenten los datos o cómo se almacenen.
 
-Clases principales:
+- BodegaViewModel: ViewModel que gestiona la lógica de negocio relacionada con la obtención, filtrado y búsqueda de bodegas. Se comunica con el repositorio para obtener los datos, aplica filtros por zona y concejo, hace búsqueda por nombre, y expone los estados de la UI mediante LiveData.
+- BodegaViewModelFactory: Factory para crear instancias de BodegaViewModel.
+- BodegaDetailsViewModel: ViewModel que gestiona la lógica de negocio para la pantalla de detalle de una bodega. Obtiene los datos de una bodega específica a partir de su ID y los expone mediante LiveData.
+- BodegaDetailsViewModelFactory: Factory para crear instancias de BodegaDetailsViewModel.
+- BodegaFavoritosViewModel: ViewModel que gestiona la lógica de negocio relacionada con las bodegas marcadas como favoritas. Permite obtener, buscar y filtrar las bodegas favoritas, así como marcar o desmarcar favoritos.
+- BodegaFavoritosViewModelFactory: Factory para crear instancias de BodegaFavoritosViewModel.
+- MapViewModel: ViewModel que gestiona la obtención de bodegas para el mapa. Carga la lista de bodegas y las expone para que la vista pueda mostrar los marcadores en el mapa.
+- MapViewModelFactory: Factory para crear instancias de MapViewModel.
+- AppUIState: Representa los diferentes estados de la UI (cargando, éxito, error) y se utiliza para comunicar el estado desde el ViewModel a la UI.
 
+## Capa de Datos (Repositorio)
 
-BodegaRepository: Proporciona una interfaz unificada para acceder a los datos de bodegas, ya sea desde la base de datos local o desde la red.
-Converters: Convierte objetos complejos a JSON y viceversa para almacenarlos en la base de datos.
-<hr></hr>
-4. Capa de Red (API y adaptadores)
-Gestiona la obtención de datos desde servicios web.
+La capa de Datos es responsable de gestionar el acceso y manipular los datos, ya sea desde la base de datos local (Room) o desde la red.
 
-Clases principales:
+- BodegaRepository: Proporciona una interfaz unificada para acceder a los datos de bodegas, ya sea desde la base de datos local o desde la red.
+- Converters: Convierte objetos complejos a JSON y viceversa para almacenarlos en la base de datos Room.
+- ApiResult: Representa el resultado de una operación de red: éxito, error o cargando.
+- EmailAdapter: Adaptador para el campo email en los modelos usados por Moshi y Room
 
+## Capa de Red (Network)
 
-RestApi: Singleton que expone el servicio de red.
-RestApiService: Interfaz de Retrofit para obtener datos de la API.
-EmailAdapter: Adaptador personalizado para deserializar listas de emails en la respuesta JSON.
-<hr></hr>
-5. Capa de Modelo (Entidades y DAO)
-Define las estructuras de datos y el acceso a la base de datos.
+La capa de Red se encarga de la comunicación con servicios externos (APIs REST). Define las interfaces y configuraciones necesarias para obtener datos de la red.
 
-Clases principales:
+- RestApi: Singleton que expone el servicio de red configurado con Retrofit.
+- RestApiService: Interfaz de Retrofit que define los endpoints para obtener los datos de la API.
+- WebService: Implementa la lógica de acceso a la API REST y devuelve los datos a la capa de repositorio.
 
+## Capa de Modelo (Model)
+La capa de Modelo define las entidades y modelos de datos que representan la información de la aplicación, así como los DAOs para el acceso a la base de datos.
 
-Bodega: Entidad principal que representa una bodega.
-BodegaDAO: Interfaz DAO para acceder a la base de datos Room.
-BodegaDatabase: Clase que define la base de datos Room.
-<hr></hr>
-6. Capa de Utilidades
-Funciones auxiliares y extensiones.
+- Bodega: Entidad principal que representa una bodega, con sus atributos y relaciones.
+- BodegaDAO: Interfaz DAO de Room para acceder y manipular los datos de bodegas en la base de datos local.
+- BodegaDatabase: Clase que define la base de datos Room y expone los DAOs.
 
-Clases principales:
-LiveDataExtensions: Extensión para observar LiveData una sola vez.
-AppState: Enum para representar el estado de la aplicación.
+*Nota: Dentro de la carpeta Model están las demás entidades de esta capa*
 
+## Capa de Utilidades (Utils)
 
-```mermaid
-classDiagram
-    class Bodega {
-        +Int id
-        +Articles articles
-        +Boolean isFavorite
-    }
-    class Articles
-    class BodegaDAO {
-        +getBodegaById()
-        +getAllBodegas()
-        +insertBodegas()
-        +updateFavorite()
-        +getFavoriteBodegas()
-    }
-    class BodegaDatabase {
-        +bodegaDAO()
-    }
-    class BodegaRepository {
-        +getBodegas()
-        +getBodegaById()
-        +insertBodegas()
-        +setFavorito()
-        +getFavoritos()
-        +updateBodegaData()
-    }
-    class BodegaViewModel
-    class BodegaDetailsViewModel
-    class BodegaFavoritosViewModel
-    class MapViewModel
-    class HomeFragment
-    class DetailFragment
-    class FavoritesFragment
-    class MapFragment
-    class BodegaDataListAdapter
-    class BodegaDetailViewHolder
-    class RestApi
-    class RestApiService
+Incluye funciones auxiliares, extensiones y utilidades generales que facilitan tareas comunes en la aplicación.
 
-    BodegaDatabase --> BodegaDAO
-    BodegaDAO --> Bodega
-    BodegaRepository --> BodegaDAO
-    BodegaRepository --> RestApi
-    RestApi --> RestApiService
-    BodegaViewModel --> BodegaRepository
-    BodegaDetailsViewModel --> BodegaRepository
-    BodegaFavoritosViewModel --> BodegaRepository
-    MapViewModel --> BodegaRepository
-    HomeFragment --> BodegaViewModel
-    DetailFragment --> BodegaDetailsViewModel
-    FavoritesFragment --> BodegaFavoritosViewModel
-    MapFragment --> MapViewModel
-    BodegaDataListAdapter --> BodegaViewHolder
-    BodegaDetailViewHolder --> DetailFragment
-```
+- LiveDataExtensions: Archivo con funciones de extensión para LiveData, como observar una sola vez.
+
