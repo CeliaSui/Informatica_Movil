@@ -17,7 +17,7 @@
 
 La aplicación sigue una arquitectura basada en MVVM (Model-View-ViewModel), que separa claramente la lógica de negocio, la gestión de datos y la interfaz de usuario.
 
-*Nota: Para acortar los términos, en las diferentes clases cuando se menciona el término 'bodega(s), se refiere a 'bodegas, llagares y queserías'.*
+*Nota: Para simplificar la terminología, en las distintas clases cuando se menciona el término "bodega(s)", se hace referencia a "bodegas, llagares y queserías".*
 
 ## Capa de Presentación (UI/View)
 
@@ -88,4 +88,7 @@ La capa de Modelo define las entidades y modelos de datos que representan la inf
 Incluye funciones auxiliares, extensiones y utilidades generales que facilitan tareas comunes en la aplicación.
 
 - LiveDataExtensions: Archivo con funciones de extensión para LiveData, como observar una sola vez.
+
+## Diagrama de clases UML
+![DiagramaApp](https://github.com/user-attachments/assets/56b59b1a-8353-4f99-b88c-78aa2d8c76b5)
 
